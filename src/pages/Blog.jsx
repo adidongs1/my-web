@@ -22,8 +22,8 @@ function Blog() {
     const fetchPosts = async () => {
         try {
             setLoading(true);
-            const res = await fetch(`https://eventespresso.com/wp-json/wp/v2/posts?_embed&page=${page}&search=${keyword}`);
-            let data = await res.json();
+            const res = await fetch(`https://api-fe-batch5.neuversity.id/api/posts?_embed&page=${page}&search=${keyword}`);
+            const data = await res.json();
 
             setPosts(data)
             setLoading(false);
@@ -85,7 +85,6 @@ function Blog() {
 
                     {/* render card blog  */}
                     <div className="wrapper-card flex flex-col gap-16">
-
                         {loading ? (
 
                             <div className="flex justify-center items-center">
@@ -101,8 +100,7 @@ function Blog() {
                             </div>
                         ) : (  // cardblog 
 
-
-                            posts.map(post => (
+                            posts?.data?.map(post => (
                                 <div key={post.id} className='flex flex-col xl:flex-row w-full xl:h-60 s shadow-lg gap-7 p-6 items-center rounded-xl'>
                                     <figure>
                                         {/* image */}
@@ -122,7 +120,7 @@ function Blog() {
                                                     {/* badge */}
                                                 </section>
                                             </div>
-                                            <NavLink to={"/single-post/ " + post.id}
+                                            <NavLink to={"/blog/single-post/" + post.id}
                                                 className="flex justify-end"
                                             >
                                                 <FillButton textBtn="Read More" />
