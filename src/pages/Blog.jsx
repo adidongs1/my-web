@@ -1,6 +1,8 @@
-import { useState, useEffect } from 'react'
+import { useEffect, useContext } from 'react'
 import { NavLink } from 'react-router-dom'
 import { RotatingLines } from 'react-loader-spinner'
+
+import { BlogContext } from '../services/BlogProvider'
 
 
 import LayoutMain from '../components/LayoutMain'
@@ -10,35 +12,7 @@ import FillButton from '../components/FillButton'
 import SearchIcon from '../assets/icons/search-icon.svg'
 
 function Blog() {
-    // Hook State
-    const [posts, setPosts] = useState([])
-    const [loading, setLoading] = useState(false)
-    const [page, setPage] = useState(1)
-    const [totalPages, setTotalPages] = useState(0)
-    const [keyword, setKeyword] = useState('')
-    const [query, setQuery] = useState('')
-
-    //fetch data function
-    const fetchPosts = async () => {
-        try {
-            setLoading(true);
-            const res = await fetch(`https://api-fe-batch5.neuversity.id/api/posts?_embed&page=${page}&search=${keyword}`);
-            const data = await res.json();
-
-            setPosts(data)
-            setLoading(false);
-            setTotalPages(parseInt(res.headers.get('X-WP-TotalPages')));
-        } catch (err) {
-            console.log(err);
-            setLoading(false);
-        }
-    };
-
-    // useEffect untuk memanggil fungsi fetchPosts() ketika page berubah
-    useEffect(() => {
-        fetchPosts();
-
-    }, [page, keyword]);
+    const { posts, loading, page, totalPages, keyword, query, setQuery, setPage, setKeyword, fetchPosts } = useContext(BlogContext)
 
     const searchPost = (e) => {
         e.preventDefault();
@@ -47,6 +21,11 @@ function Blog() {
 
         console.log('isQuery', query)
     }
+
+    //useEffect untuk memanggil fungsi fetchPosts() dari BlogProvider
+    useEffect(() => {
+        fetchPosts();
+    }, [page, keyword]);
 
 
     return (
