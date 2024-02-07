@@ -1,5 +1,4 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { ToastContainer } from 'react-toastify'
 
 //pages
 import Maintenance from './pages/Maintenance'
@@ -9,6 +8,7 @@ import NotFound from './pages/NotFound'
 import SinglePost from './pages/SinglePost'
 import LoginAdmin from './pages/LoginAdmin'
 import Dashboard from './pages/Dashboard'
+import NewPost from './pages/NewPost'
 
 //services
 import AuthProvider from './services/AuthProvider'
@@ -18,7 +18,6 @@ import BlogProvider from './services/BlogProvider'
 function App() {
   return (
     <>
-      <ToastContainer />
       <Router>
         <AuthProvider>
           <BlogProvider>
@@ -27,6 +26,7 @@ function App() {
               <Route path="/admin" element={<LoginAdmin />} />
               <Route element={<PrivateRoute />}>
                 <Route path="/admin/dashboard" element={<Dashboard />} />
+                <Route path="/admin/new-post" element={<NewPost />} />
               </Route>
 
 
