@@ -11,11 +11,11 @@ function Sidebar() {
 
             <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label>
 
-            <aside className='bg-base-200 min-h-screen w-80'>
+            <aside className='bg-base-200 min-h-[100dvh] w-80'>
                 <div className='bg-base-200 sticky top-0 z-20 hidden items-center gap-2 bg-opacity-90 px-4 py-2 backdrop-blur lg:flex '>
-                    <a href="/dashboard">
+                    <NavLink to="/admin/dashboard">
                         <img src={Logo} alt="Logo" className='h-10' />
-                    </a>
+                    </NavLink>
                 </div>
                 <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
                     {/* Sidebar content here */}
@@ -29,13 +29,13 @@ function Sidebar() {
                             </summary>
                             <ul>
                                 <li>
-                                    <NavLink to="/dashboard">Blog Posts</NavLink>
+                                    <NavLink to="/admin/dashboard">Blog Posts</NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to="/blog-categories">Categories</NavLink>
+                                    <NavLink to="/admin/blog-categories" className="pointer-events-none opacity-25">Categories</NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to="/new-post">Add New Post</NavLink>
+                                    <NavLink to="/admin/new-post">Add New Post</NavLink>
                                 </li>
 
                             </ul>

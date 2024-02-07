@@ -19,7 +19,6 @@ function Blog() {
         setPage(1);
         setKeyword(query);
 
-        console.log('isQuery', query)
     }
 
     //useEffect untuk memanggil fungsi fetchPosts() dari BlogProvider
@@ -49,7 +48,7 @@ function Blog() {
                                     type="text"
                                     id='search'
                                     name='search'
-                                    className="input input-bordered join-item min-w-96"
+                                    className="input input-bordered join-item xl:min-w-96 min-w-80"
                                     placeholder="Search..."
                                     value={query}
                                     onChange={(e) => setQuery(e.target.value)}

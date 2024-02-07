@@ -7,8 +7,7 @@ import IconEdit from '../assets/icons/tabler_edit.svg'
 
 
 function TabelDashboard() {
-    const { posts, fetchPosts, page, keyword } = useContext(BlogContext)
-    const [checked, setChecked] = useState([])
+    const { posts, fetchPosts, page, keyword, checked, setChecked } = useContext(BlogContext)
     const [isAllChecked, setIsAllChecked] = useState(false)
 
     //useEffect untuk memanggil fungsi fetchPosts() dari BlogProvider
@@ -19,49 +18,33 @@ function TabelDashboard() {
 
     // all-check
     const handleAllCheck = () => {
-        console.log("allCheked", isAllChecked)
         // jika semua checkbox tercheck, maka uncheck semuax
         if (isAllChecked) {
             setChecked([])
+            console.log([]);
         } else {
-            setChecked(posts.data.map(post => post.id))
+            const newChecked = posts?.data?.map(post => post.id)
+            setChecked(newChecked)
+            console.log('newChecked-all', newChecked)
         }
         setIsAllChecked(!isAllChecked)
-        console.log('checked', checked)
     }
 
     //single-check
     const handleCheck = (id) => {
-        console.log('singlecheck', id)
-        // setIsAllChecked(false);
-
-        //if-else untuk state checked
-        if (checked.includes(id)) {
-            setChecked(checked.filter(item => item !== id))
-        } else {
-            setChecked([...checked, id])
-        }
-
         //jika semua checkbox tercheck, maka all-check tercheck
-        const newChecked = checked.includes(id) ? checked.filter(item => item !== id) : [...checked, id];
+        const newChecked = checked.includes(id) ?
+            checked.filter(item => item !== id)
+            :
+            [...checked, id];
+
+
         setIsAllChecked(posts?.data?.length === newChecked.length)
+        setChecked(newChecked)
+        console.log('checked-single', newChecked)
     }
 
-    const handleMultiDelete = () => {
-        checked.map(id => {
-            // fetch delete
-            fetch(`https://api-fe-batch5.neuversity.id/api/posts/${id}`, {
-                method: 'DELETE',
-            })
-                .then(res => res.json())
-                .then(data => {
-                    console.log(data)
-                })
-                .catch(err => console.log(err))
 
-        })
-        fetchPosts()
-    }
 
 
     return (
@@ -71,7 +54,7 @@ function TabelDashboard() {
                 <tr>
                     <th>
                         <label>
-                            <input type="checkbox" className='checkbox' checked={isAllChecked} onClick={handleAllCheck} />
+                            <input type="checkbox" className='checkbox' checked={isAllChecked} onChange={handleAllCheck} />
 
                         </label>
                     </th>
@@ -105,7 +88,7 @@ function TabelDashboard() {
                             {/* dibawah ini pake data */}
                             {/* date */}
                             <td>
-                                <span className='text-black font-semibold text-base'>{post.date} </span>
+                                <span className='text-black font-semibold text-base'>{new Date(post.date).toLocaleString('en-GB')} </span>
                             </td>
                             {/* title */}
                             <td className='w-40'>

@@ -22,12 +22,12 @@ function Footer() {
                     </a>
                     <a href="https://goo.gl/maps/4yY2Yw5L7Y8fWgVb6" className='flex gap-4 text-base text-slate-400 font-semibold items-center'>
                         <img src={AddressLogo} alt="Address" />
-                        Jenengan, Maguwoharjo, Kec. Depok,<br /> Kabupaten Sleman, Daerah Istimewa Yogyakarta 55281
+                        Kec. Depok, Kabupaten Sleman, Daerah Istimewa Yogyakarta
                     </a>
 
                 </div>
             </aside>
-            <nav className='flex flex-col gap-4 items-end'>
+            <nav className='flex flex-col gap-4 xl:items-end'>
 
                 <h2 className='text-prim-jade-500 text-2xl font-bold gap-0'>Find Me</h2>
                 <div className="grid grid-flow-col gap-4">

@@ -1,7 +1,6 @@
 import { useState } from "react";
 import useAuth from "../services/UseAuth";
-import { toast } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
+import Swal from 'sweetalert2'
 
 
 import Logo from '../assets/img/just-logo.png'
@@ -25,16 +24,15 @@ function LoginAdmin() {
             return
 
         } else {
-            toast.error('Username and Password tidak boleh kosong!',
-                {
-                    position: "top-right",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                });
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Silahkan isi username dan password!',
+                showConfirmButton: true,
+                confirmButtonText: 'OK',
+                confirmButtonColor: '#17b472'
+
+            })
         }
 
     }
@@ -48,17 +46,17 @@ function LoginAdmin() {
     }
 
     return (
-        <section className="min-h-screen flex justify-center">
+        <section className="flex min-h-[100dvh]">
 
-            <div className="card w-[36rem] bg-blue-charcoal-950 m-auto py-20 px-12 rounded-[6rem]">
+            <div className="card xl:w-[36rem] bg-blue-charcoal-950 m-auto xl:py-20 xl:px-12 py-5 px-5 xl:rounded-[6rem] rounded-[4rem] justify-center">
                 <form onSubmit={handleSubmit} >
-                    <section className="card-body items-center text-center flex gap-6">
+                    <section className="card-body items-center text-center flex xl:gap-6">
                         <h2 className="card-title">
-                            <img src={Logo} alt="A" className='min-h-32' />
+                            <img src={Logo} alt="A" className='xl:min-h-32 h-16' />
                         </h2>
 
                         <div className="form-control w-full">
-                            <label htmlFor="user-username" className='text-lg font-bold text-start text-white line tracking-wider'>Username</label>
+                            <label htmlFor="user-username" className='xl:text-lg text-base font-bold text-start text-white line tracking-wider'>Username</label>
                             <input
                                 type="username"
                                 id="user-username"
@@ -67,14 +65,14 @@ function LoginAdmin() {
                                 aria-describedby="user-username"
                                 aria-invalid="false"
                                 onChange={handleInput}
-                                className='min-h-12 rounded-lg px-4 py-2 w-full'
+                                className='xl:min-h-12  rounded-lg px-4 py-2 w-full'
                             />
                             <div id="user-username" className="sr-only">
                                 Please enter a valid username. It must contain at least 6 characters.
                             </div>
                         </div>
                         <div className="form-control w-full">
-                            <label htmlFor="password" className='text-lg font-bold text-start text-white line tracking-wider'>Password</label>
+                            <label htmlFor="password" className='xl:text-lg text-base font-bold text-start text-white line tracking-wider'>Password</label>
                             <input
                                 type="password"
                                 id="password"
@@ -84,7 +82,7 @@ function LoginAdmin() {
                                 aria-invalid="false"
                                 onChange={handleInput}
                                 autoComplete='off'
-                                className='min-h-12 rounded-lg px-4 py-2 w-full'
+                                className='xl:min-h-12  rounded-lg px-4 py-2 w-full'
                             />
                             <div id="user-password" className="sr-only">
                                 your password should be more than 6 character

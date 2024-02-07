@@ -26,9 +26,9 @@ function LayoutAdmin({ children }) {
                                     </label>
                                 </span>
                                 <div className="flex items-center gap-2 lg:hidden">
-                                    <a href="/dashboard">
-                                        <img src={Logo} alt="Logo0" className='h-10' />
-                                    </a>
+                                    <NavLink href="/admin/dashboard">
+                                        <img src={Logo} alt="Logo" className='h-10' />
+                                    </NavLink>
 
                                 </div>
 

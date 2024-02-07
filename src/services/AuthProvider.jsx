@@ -1,7 +1,6 @@
 import { createContext, useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { toast } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
+import Swal from 'sweetalert2'
 
 export const AuthContext = createContext()
 
@@ -32,35 +31,38 @@ export default function AuthProvider({ children }) {
             })
 
             const data = await response.json()
-            console.log('response', response)
-            console.log(data)
 
             if (response.ok) {
+                console.log(data)
+
                 setUser(data)
                 localStorage.setItem('token', data.data.token)
-                toast.success('Login Berhasil!', {
-                    position: "top-right",
-                    autoClose: 5000,
-                    hideProgressBar: true,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
+
+                // Alert Berhasil
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Login Berhasil!',
+                    text: 'Selamat Datang' + ' ' + data.data.username + '!',
+                    showConfirmButton: true,
+                    confirmButtonText: 'OK',
+                    confirmButtonColor: '#17b472'
+
                 })
                 navigate('/admin/dashboard')
                 return
+
             } else {
+                const ErrorMessage = data.errors.message ? "Username dan Password Salah!" : 'Something went wrong'
                 // alert(data.errors.message)
-                toast.error(String(data.errors.message),
-                    {
-                        position: "top-right",
-                        autoClose: 5000,
-                        hideProgressBar: true,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                    });
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: ErrorMessage,
+                    showConfirmButton: true,
+                    confirmButtonText: 'OK',
+                    confirmButtonColor: '#17b472'
+
+                })
 
             }
         }
@@ -74,6 +76,15 @@ export default function AuthProvider({ children }) {
     const logout = () => {
         setUser(null)
         localStorage.removeItem('token')
+        Swal.fire({
+            icon: 'success',
+            title: 'Logout Berhasil!',
+            text: 'Anda Berhasil Logout!',
+            showConfirmButton: true,
+            confirmButtonText: 'OK',
+            confirmButtonColor: '#17b472'
+
+        })
         navigate('/')
     }
 
