@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom'
-import useAuth from '../services/UseAuth'
+import useAuth from '../utils/UseAuth'
 
 import Logo from '../assets/img/logo.png'
 import IconHome from '../assets/icons/icon-home.svg'
