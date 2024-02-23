@@ -9,16 +9,22 @@ import SinglePost from './pages/SinglePost'
 import LoginAdmin from './pages/LoginAdmin'
 import Dashboard from './pages/Dashboard'
 import NewPost from './pages/NewPost'
+import EditPostForm from './pages/EditPostForm'
+import DashboardMedia from './pages/DashboardMedia'
+
 
 //services
-import AuthProvider from './services/AuthProvider'
-import PrivateRoute from './services/PrivateRoute'
-import BlogProvider from './services/BlogProvider'
+import AuthProvider from './utils/AuthProvider'
+import PrivateRoute from './utils/PrivateRoute'
+import BlogProvider from './utils/BlogProvider'
+import ScrollToTop from './utils/ScrollToTop'
+
 
 function App() {
   return (
     <>
       <Router>
+        <ScrollToTop />
         <AuthProvider>
           <BlogProvider>
             <Routes>
@@ -27,6 +33,8 @@ function App() {
               <Route element={<PrivateRoute />}>
                 <Route path="/admin/dashboard" element={<Dashboard />} />
                 <Route path="/admin/new-post" element={<NewPost />} />
+                <Route path="/admin/edit-post/:id" element={<EditPostForm />} />
+                <Route path="/admin/media" element={<DashboardMedia />} />
               </Route>
 
 
@@ -39,6 +47,7 @@ function App() {
               <Route path="/blog" element={<Blog />} />
               <Route path="/blog/single-post/:id" element={<SinglePost />} />
 
+              {/* <Route path="/test-feature" element={<TestFeature />} /> */}
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BlogProvider>
