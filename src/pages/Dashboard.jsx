@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 
 //services
-import { BlogContext } from '../services/BlogProvider'
+import { BlogContext } from '../utils/BlogProvider'
 
 //components
 import LayoutAdmin from '../components/LayoutAdmin'
@@ -9,12 +9,12 @@ import TabelDashboard from '../components/TabelDashboard'
 import Paginations from '../components/Paginations'
 
 function Dashboard() {
-    const { handleMultiDelete, totalPages, page, setPage } = useContext(BlogContext)
+    const { handleMultiDelete, totalPages, page, setPage, checked } = useContext(BlogContext)
     return (
         <LayoutAdmin>
             <div className="container mb-24 mt-4">
                 <h1 className='text-5xl font-bold px-6'>Blog Posts</h1>
-                <div className='px-6 py-12'>
+                <div className='px-6 py-12 overflow-x-auto'>
                     {/* tabel */}
                     <TabelDashboard />
 
@@ -22,7 +22,11 @@ function Dashboard() {
 
 
                 <div className='flex w-full xl:justify-end justify-center mb-12'>
-                    <button onClick={handleMultiDelete} className='btn items-center justify-center border-2 border-transparent xl:py-2 xl:px-4 px-8 bg-sec-pomegranate-500 rounded-lg text-white font-semibold xl:text-base text-xl' >
+                    <button
+                        onClick={handleMultiDelete}
+                        className='btn items-center justify-center border-2 border-transparent xl:py-2 xl:px-4 px-8 bg-sec-pomegranate-500 rounded-lg text-white font-semibold xl:text-base text-xl'
+                        disabled={checked.length === 0}
+                    >
                         Delete
                     </button>
                 </div>
