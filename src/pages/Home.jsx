@@ -3,6 +3,7 @@ import LayoutMain from '../components/LayoutMain'
 
 import ImgHero from '../assets/img/hero.png'
 import DownloadCv from '../assets/icons/cv_download.svg'
+import cv from '../assets/CV_Adi.pdf'
 
 
 import FillButton from '../components/FillButton'
@@ -29,7 +30,9 @@ function Home() {
                         </div>
 
                         <div className="actions flex gap-6">
-                            <FillButton IconBtn={DownloadCv} textBtn="Download CV" />
+                            <a href={cv} download>
+                                <FillButton IconBtn={DownloadCv} textBtn="Download CV" />
+                            </a>
                             <OutlineButton textBtn="More About Me" />
                         </div>
                     </div>

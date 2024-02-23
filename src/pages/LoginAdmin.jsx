@@ -1,5 +1,5 @@
 import { useState } from "react";
-import useAuth from "../services/UseAuth";
+import useAuth from "../utils/UseAuth";
 import Swal from 'sweetalert2'
 
 
@@ -14,6 +14,8 @@ function LoginAdmin() {
         username: '',
         password: ''
     });
+
+    const [showPassword, setShowPassword] = useState(false)
 
     const { login } = useAuth()
 
@@ -74,7 +76,7 @@ function LoginAdmin() {
                         <div className="form-control w-full">
                             <label htmlFor="password" className='xl:text-lg text-base font-bold text-start text-white line tracking-wider'>Password</label>
                             <input
-                                type="password"
+                                type={showPassword ? 'text' : 'password'}
                                 id="password"
                                 name="password"
                                 placeholder="Enter Password"
@@ -84,6 +86,9 @@ function LoginAdmin() {
                                 autoComplete='off'
                                 className='xl:min-h-12  rounded-lg px-4 py-2 w-full'
                             />
+                            <div className="flex justify-end">
+                                <button type="button" onClick={() => setShowPassword(!showPassword)} className="text-white text-sm font-semibold mt-2">Show Password</button>
+                            </div>
                             <div id="user-password" className="sr-only">
                                 your password should be more than 6 character
                             </div>

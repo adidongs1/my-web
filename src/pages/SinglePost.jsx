@@ -10,7 +10,7 @@ function SinglePost() {
 
     const fetchIdPost = async () => {
         try {
-            const res = await fetch(`https://api-fe-batch5.neuversity.id/api/posts/${id}`);
+            const res = await fetch(`${import.meta.env.VITE_BASE_URL}/wp-json/wp/v2/posts/${id}`);
             const data = await res.json();
             setPost(data)
         } catch (err) {
@@ -36,18 +36,18 @@ function SinglePost() {
                         </div>
                         <h1 className='font-semibold text-4xl'>
                             {/* title */}
-                            {post?.data?.title?.rendered}
+                            {post?.title?.rendered}
                         </h1>
                         <label className='text-sm text-slate-400 mt-5'>
                             {/* date */}
-                            {post?.data?.date}
+                            {new Date(post.date).toLocaleString('en-GB')}
                         </label>
                     </div>
 
                     <div className="content grid grid-cols-1 gap-8">
                         <div>
                             {/* content */}
-                            <div dangerouslySetInnerHTML={{ __html: post?.data?.content?.rendered }} />
+                            <div dangerouslySetInnerHTML={{ __html: post?.content?.rendered }} />
                         </div>
                     </div>
                 </div>
