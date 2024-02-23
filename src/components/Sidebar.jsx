@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom'
 import Logo from '../assets/img/logo.png'
 import IconBlogs from '../assets/icons/carbon_blog.svg'
 import IconPortfolio from '../assets/icons/portofolio-icons.svg'
+import IconMedia from '../assets/icons/icon-media.svg'
 
 function Sidebar() {
     return (
@@ -20,8 +21,8 @@ function Sidebar() {
                 <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
                     {/* Sidebar content here */}
                     <li>
-                        <details id='disclosure-blogs'>
-                            <summary className='group'>
+                        <details id='disclosure-blogs' open>
+                            <summary className='group font-semibold'>
                                 <span>
                                     <img src={IconBlogs} alt="Blogs" />
                                 </span>
@@ -32,11 +33,30 @@ function Sidebar() {
                                     <NavLink to="/admin/dashboard">Blog Posts</NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to="/admin/blog-categories" className="pointer-events-none opacity-25">Categories</NavLink>
+                                    <NavLink to="/admin/new-post" >Add New Post</NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to="/admin/new-post">Add New Post</NavLink>
+                                    <NavLink to={`${import.meta.env.VITE_BASE_URL}/wp-admin`} >New Post - WP</NavLink>
                                 </li>
+                            </ul>
+                        </details>
+                    </li>
+
+                    <li>
+                        <details id='disclosure-media'>
+                            <summary className='group font-semibold'>
+                                <span>
+                                    <img src={IconMedia} alt="Media" />
+                                </span>
+                                Media
+                            </summary>
+                            <ul>
+                                <li>
+                                    <NavLink to="/admin/media">
+                                        Media Library
+                                    </NavLink>
+                                </li>
+
 
                             </ul>
                         </details>
