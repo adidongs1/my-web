@@ -78,6 +78,8 @@ function NewPostFrom() {
                     title: 'Waduh...!',
                     text: 'Gagal mengunggah thumbnail!',
                 });
+                setIsLoading(false);
+                return;
             }
         }
 
@@ -86,7 +88,7 @@ function NewPostFrom() {
             title,
             content,
             status: 'publish',
-            featured_media: thumbnailId,
+            featured_media: thumbnailId || 0,
         }
         // reset form
         addPost(newPost)
@@ -97,6 +99,24 @@ function NewPostFrom() {
         setIsLoading(false)
     };
 
+    let token = null;
+    let imageUploadURL = null;
+    let imageUploadMethod = null;
+    let requestHeaders = null;
+
+    try {
+        token = localStorage.getItem('token');
+        imageUploadURL = `${import.meta.env.VITE_BASE_URL}/wp-json/wp/v2/media`;
+        imageUploadMethod = 'POST';
+        requestHeaders = {
+            'Authorization': `Bearer ${token}`
+        }
+    } catch (error) {
+        console.log('NewPostForm.jsx:113, Upload error: ', error);
+        imageUploadURL = null;
+        imageUploadMethod = null;
+        requestHeaders = null;
+    }
 
 
     return (
@@ -127,10 +147,11 @@ function NewPostFrom() {
 
                     {/* Thumbnail */}
                     <label className="form-control w-full">
-                        <label htmlFor="Thumbnail-post" className='text-lg font-bold text-start text-black '>Thumbnail/Photo</label>
+                        <label htmlFor="thumbnail-post" className='text-lg font-bold text-start text-black '>Thumbnail/Photo</label>
                         {/* form Input File */}
                         <input
                             type="file"
+                            id="thumbnail-post"
                             className="file-input file-input-bordered w-full"
                             accept="image/jpeg, image/png, image/jpg"
                             onChange={hanldeImgChange}
@@ -156,13 +177,12 @@ function NewPostFrom() {
                                 placeholderText: 'Enter Content Here...',
                                 charCounterCount: false,
                                 imageAllowedTypes: ['jpeg', 'jpg', 'png'],
-                                imageUploadURL: `${import.meta.env.VITE_BASE_URL}/wp-json/wp/v2/media`,
-                                imageUploadMethod: 'POST',
-                                requestHeaders: {
-                                    Authorization: `Bearer ${localStorage.getItem('token')}`
-                                }
+                                imageUploadURL: imageUploadURL,
+                                imageUploadMethod: imageUploadMethod,
+                                requestHeaders: requestHeaders,
 
                             }}
+                            name="content-post"
                         />
 
                     </div>
@@ -171,6 +191,7 @@ function NewPostFrom() {
 
                     <input
                         type="submit"
+                        id="submit-post"
                         className="mt-12 py-2 px-4 rounded-lg bg-prim-jade-500 text-white border-2 border-transparent hover:bg-transparent  hover:text-prim-jade-500 hover:border-2 hover:border-solid hover:border-prim-jade-500"
                         value={isLoading ? 'Loading...' : 'Submit'}
                         disabled={isLoading}
