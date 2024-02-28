@@ -13,7 +13,9 @@ import SearchIcon from '../assets/icons/search-icon.svg'
 import SadFace from '../assets/icons/sad-face.svg'
 
 function Blog() {
-    const { posts, loading, page, totalPages, keyword, query, setQuery, setPage, setKeyword, fetchPosts, images, fetchImages } = useContext(BlogContext)
+    const { posts, loading, page, totalPages, keyword, query, setQuery, setPage, setKeyword, fetchPosts, images, fetchImages, sortOrder, setSortOrder, sortField, setSortField } = useContext(BlogContext)
+
+
 
 
     const handleSearchSubmit = (e) => {
@@ -70,17 +72,30 @@ function Blog() {
                     <div className="wrapper-card flex flex-col gap-16">
                         {loading ? (
 
-                            <div className="flex justify-center items-center">
-                                <RotatingLines
-                                    visible={loading}
-                                    color="#000"
-                                    height={100}
-                                    width={100}
-                                    strokeWidth='6'
-                                    animationDuration={loading ? 1000 : 0}
-                                    ariaLabel='rotating-lines-loading'
-                                />
+                            <div className='flex justify-center items-center min-h-svh'>
+                                <svg
+                                    className='animate-spin h-64 w-64 mx-auto text-prim-jade-500 '
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <circle
+                                        className="opacity-25"
+                                        cx={12}
+                                        cy={12}
+                                        r={10}
+                                        stroke="currentColor"
+                                        strokeWidth={4}
+                                    />
+                                    <path
+                                        className="opacity-75"
+                                        fill="currentColor"
+                                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                                    />
+                                </svg>
                             </div>
+
+
                         ) : (  // cardblog 
                             posts.length > 0 ? (
                                 posts.map(post => (
@@ -91,11 +106,11 @@ function Blog() {
                                                     <img
                                                         src={images[post.id]}
                                                         alt={post.title.rendered}
-                                                        className="min-w-96 h-60 object-cover rounded-xl"
+                                                        className="xl:min-w-96 h-60 object-cover rounded-xl"
                                                     />
                                                 ) : (
                                                     <div
-                                                        className="skeleton min-w-96 h-60 object-cover rounded-xl"
+                                                        className="skeleton xl:min-w-96 h-60 object-cover rounded-xl"
                                                     />
                                                 )
                                             }
@@ -143,7 +158,7 @@ function Blog() {
                         }
                     </div>
 
-                    <div className=" pagination flex justify-center items-center">
+                    <div className={`pagination flex justify-center items-center ${loading ? 'hidden' : ''}`}>
                         <Paginations
                             page={page}
                             totalPages={totalPages}
@@ -153,7 +168,7 @@ function Blog() {
 
                 </div>
 
-            </section>
+            </section >
         </LayoutMain >
     )
 }
