@@ -16,6 +16,7 @@ import DashboardMedia from './pages/DashboardMedia'
 //services
 import AuthProvider from './utils/AuthProvider'
 import PrivateRoute from './utils/PrivateRoute'
+import MediaProvider from './utils/MediaProvider'
 import BlogProvider from './utils/BlogProvider'
 import ScrollToTop from './utils/ScrollToTop'
 
@@ -27,29 +28,31 @@ function App() {
         <ScrollToTop />
         <AuthProvider>
           <BlogProvider>
-            <Routes>
-              {/* admin */}
-              <Route path="/admin" element={<LoginAdmin />} />
-              <Route element={<PrivateRoute />}>
-                <Route path="/admin/dashboard" element={<Dashboard />} />
-                <Route path="/admin/new-post" element={<NewPost />} />
-                <Route path="/admin/edit-post/:id" element={<EditPostForm />} />
-                <Route path="/admin/media" element={<DashboardMedia />} />
-              </Route>
+            <MediaProvider>
+              <Routes>
+                {/* admin */}
+                <Route path="/onepiece" element={<LoginAdmin />} />
+                <Route element={<PrivateRoute />}>
+                  <Route path="/onepiece/dashboard" element={<Dashboard />} />
+                  <Route path="/onepiece/new-post" element={<NewPost />} />
+                  <Route path="/onepiece/edit-post/:id" element={<EditPostForm />} />
+                  <Route path="/onepiece/media" element={<DashboardMedia />} />
+                </Route>
 
 
-              <Route path="/" element={<Home />} />
-              <Route path="/about" element={<Maintenance />} />
-              <Route path="/portfolio" element={<Maintenance />} />
-              <Route path="/contacts" element={<Maintenance />} />
+                <Route path="/" element={<Home />} />
+                <Route path="/about" element={<Maintenance />} />
+                <Route path="/portfolio" element={<Maintenance />} />
+                <Route path="/contacts" element={<Maintenance />} />
 
-              {/* path blogging */}
-              <Route path="/blog" element={<Blog />} />
-              <Route path="/blog/single-post/:id" element={<SinglePost />} />
+                {/* path blogging */}
+                <Route path="/blog" element={<Blog />} />
+                <Route path="/blog/single-post/:id" element={<SinglePost />} />
 
-              {/* <Route path="/test-feature" element={<TestFeature />} /> */}
-              <Route path="*" element={<NotFound />} />
-            </Routes>
+                {/* <Route path="/test-feature" element={<TestFeature />} /> */}
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </MediaProvider>
           </BlogProvider>
         </AuthProvider>
       </Router>
