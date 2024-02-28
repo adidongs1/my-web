@@ -52,11 +52,12 @@ export default function BlogProvider({ children }) {
             let endPoint = `${import.meta.env.VITE_BASE_URL}/wp-json/wp/v2/posts?author=2&page=${page}&search=${keyword}`
             const res = await fetch(endPoint);
             const data = await res.json();
-            console.log('BlogProvider.jsx:54, fetchPosts: ', data)
-
-            setPosts(data)
-            setLoading(false);
-            setTotalPages(parseInt(res.headers.get('X-WP-TotalPages')));
+            // console.log('BlogProvider.jsx:54, fetchPosts: ', data)
+            setTimeout(() => {
+                setPosts(data)
+                setTotalPages(parseInt(res.headers.get('X-WP-TotalPages')));
+                setLoading(false);
+            }, 3000);
         } catch (err) {
             console.log(err);
             setLoading(false);
@@ -112,13 +113,17 @@ export default function BlogProvider({ children }) {
         if (!Array.isArray(checked)) return console.log('checked is not an array');
 
         Swal.fire({
-            title: 'Apa kamu yakin menghapus ini?',
-            text: "Kamu tidak akan bisa mengembalikan ini!",
+            title: `Yakin ingin menghapus ${checked.length} post?`,
+            html: `
+            Post dengan id <strong>${checked.join(', ')}</strong> akan dihapus!</br> 
+            <strong>Perhatian!</strong> Tindakan ini tidak dapat dikembalikan!
+            `,
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#17b472',
             cancelButtonColor: '#d33',
             confirmButtonText: 'Ya, Hapus!',
+            cancelButtonText: 'Batal'
         }).then((result) => {
             const configDelete = {
                 method: 'DELETE',
@@ -136,7 +141,7 @@ export default function BlogProvider({ children }) {
                             Swal.fire({
                                 icon: 'success',
                                 title: 'Post Terhapus!',
-                                text: 'Post Berhasil di Hapus!',
+                                text: `Post dengan id ${id} telah dihapus!`,
                                 showConfirmButton: true,
                                 confirmButtonText: 'OK',
                                 confirmButtonColor: '#17b472'
@@ -182,8 +187,8 @@ export default function BlogProvider({ children }) {
                 if (data.id) {
                     Swal.fire({
                         icon: 'success',
-                        title: 'Berhasil!',
-                        text: 'Post Telah Diedit!',
+                        title: 'Edit Berhasil!',
+                        html: `Post dengan id <strong>${id}</strong> telah diubah!`,
                         showConfirmButton: true,
                         confirmButtonText: 'OK',
                         confirmButtonColor: '#17b472'

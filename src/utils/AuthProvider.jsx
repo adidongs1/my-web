@@ -43,7 +43,7 @@ export default function AuthProvider({ children }) {
                     confirmButtonColor: '#17b472'
 
                 })
-                navigate('/admin/dashboard')
+                navigate('/onepiece/dashboard')
                 return
 
             } else {
