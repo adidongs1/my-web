@@ -14,7 +14,7 @@ function Sidebar() {
 
             <aside className='bg-base-200 min-h-[100dvh] w-80'>
                 <div className='bg-base-200 sticky top-0 z-20 hidden items-center gap-2 bg-opacity-90 px-4 py-2 backdrop-blur lg:flex '>
-                    <NavLink to="/admin/dashboard">
+                    <NavLink to="/onepiece/dashboard">
                         <img src={Logo} alt="Logo" className='h-10' />
                     </NavLink>
                 </div>
@@ -30,20 +30,20 @@ function Sidebar() {
                             </summary>
                             <ul>
                                 <li>
-                                    <NavLink to="/admin/dashboard">Blog Posts</NavLink>
+                                    <NavLink to="/onepiece/dashboard">All Posts</NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to="/admin/new-post" >Add New Post</NavLink>
+                                    <NavLink to="/onepiece/new-post" >Add New Post</NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to={`${import.meta.env.VITE_BASE_URL}/wp-admin`} >New Post - WP</NavLink>
+                                    <NavLink to={`${import.meta.env.VITE_BASE_URL}/wp-admin`} >Dashboard - WP</NavLink>
                                 </li>
                             </ul>
                         </details>
                     </li>
 
                     <li>
-                        <details id='disclosure-media'>
+                        <details id='disclosure-media' className=''>
                             <summary className='group font-semibold'>
                                 <span>
                                     <img src={IconMedia} alt="Media" />
@@ -52,8 +52,8 @@ function Sidebar() {
                             </summary>
                             <ul>
                                 <li>
-                                    <NavLink to="/admin/media">
-                                        Media Library
+                                    <NavLink to="/onepiece/media">
+                                        Library
                                     </NavLink>
                                 </li>
 
@@ -62,8 +62,8 @@ function Sidebar() {
                         </details>
                     </li>
 
-                    <li className='hidden'>
-                        <details id='disclosure-portfolio'>
+                    <li>
+                        <details id='disclosure-portfolio' className='pointer-events-none opacity-25' >
                             <summary className='group'>
                                 <span>
                                     <img src={IconPortfolio} alt="Portfolio" />
