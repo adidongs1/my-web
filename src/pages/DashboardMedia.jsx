@@ -1,30 +1,40 @@
-import { useState, useEffect } from "react";
+import { useContext } from 'react'
 
+//services
+import { MediaContext } from '../utils/MediaProvider'
+
+//components
+import LayoutAdmin from '../components/LayoutAdmin'
+import TabelMedia from '../components/TabelMedia'
+import Paginations from '../components/Paginations'
 
 function DashboardMedia() {
-    const [mediaItems, setMediaItems] = useState([]);
-
-    useEffect(() => {
-        fetch(`${import.meta.env.VITE_BASE_URL}/wp-json/wp/v2/media?author=2`)
-            .then(res => res.json())
-            .then(data => {
-                setMediaItems(data)
-            })
-    }, []);
-
+    const { totalPages, page, setPage, checked, handleMultiDelete } = useContext(MediaContext)
 
     return (
-        <>
-            <div>
-                <h1>Media Dashboard</h1>
-                {mediaItems.map(item => (
-                    <div key={item.id}>
-                        <h2>{item.title.rendered}</h2>
-                        <img src={item.guid.rendered} alt={item.title.rendered} />
-                    </div>
-                ))}
-            </div>
-        </>
+        <LayoutAdmin>
+            <div className="container mb-24 mt-4">
+                <h1 className='text-5xl font-bold px-6'>Media Library</h1>
+                <div className='px-6 py-12 overflow-x-auto'>
+                    {/* tabel */}
+                    <TabelMedia />
+                </div>
+
+                <div className='flex w-full xl:justify-end justify-center mb-12'>
+                    <button
+                        onClick={handleMultiDelete}
+                        className='btn items-center justify-center border-2 border-transparent xl:py-2 xl:px-4 px-8 bg-sec-pomegranate-500 rounded-lg text-white font-semibold xl:text-base text-xl'
+                        disabled={checked.length === 0}
+                    >
+                        Delete
+                    </button>
+                </div>
+
+                <div className="paginations flex justify-center items-center">
+                    <Paginations totalPages={totalPages} page={page} setPage={setPage} />
+                </div>
+            </div >
+        </LayoutAdmin>
     )
 }
 
