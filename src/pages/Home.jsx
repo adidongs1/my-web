@@ -24,7 +24,7 @@ function Home() {
     return (
         <LayoutMain>
             <div className="container mx-auto xl:px-16 px-5 grid grid-cols-1 xl:gap-40 gap-20">
-                <section className='header flex flex-col-reverse sm:flex-row items-center min-h-screen'>
+                <section className='header flex flex-col-reverse md:flex-row items-center min-h-screen'>
                     {/* content-left */}
                     <div className="content-left flex flex-col gap-6 w-full">
                         <div className='title'>
@@ -49,7 +49,7 @@ function Home() {
 
                     {/* content-right */}
                     <div className="content-right w-full">
-                        <img src={ImgHero} alt="image" className="h-[49rem] object-cover" />
+                        <img src={ImgHero} alt="image" className="h-[49rem] object-contain" />
                     </div>
 
                 </section>
@@ -64,9 +64,9 @@ function Home() {
                         </div>
 
                         {/* card skills */}
-                        <div className="cards w-full flex flex-col xl:flex-row gap-24 justify-center">
+                        <div className="cards w-full flex flex-col md:flex-row gap-24 justify-between">
                             {/* web development */}
-                            <div className="w-80">
+                            <div className="w-96 p-4">
                                 <div className="flex flex-col">
                                     <img src={WebIcon} alt="web-icon" className="w-20 h-20 py-4 bg-base-100 rounded-xl shadow-lg" />
                                     <h2 className="card-title py-4">Web Development</h2>
@@ -78,7 +78,7 @@ function Home() {
                             </div>
 
                             {/* Graphic Designer */}
-                            <div className="w-80">
+                            <div className="w-96 p-4">
                                 <div className="flex flex-col">
                                     <img src={GraphicIcon} alt="graphic-icon" className="w-20 h-20 py-4 bg-base-100 rounded-xl shadow-lg" />
                                     <h2 className="card-title py-4">Graphic Designer</h2>
@@ -90,7 +90,7 @@ function Home() {
                             </div>
 
                             {/* User Interface (UI) Development */}
-                            <div className="w-80">
+                            <div className="w-96 p-4">
                                 <div className="flex flex-col">
                                     <img src={UiIcon} alt="ui-icon" className="w-20 h-20 py-4 bg-base-100 rounded-xl shadow-lg" />
                                     <h2 className="card-title py-4">User Interface (UI) Development</h2>
@@ -116,12 +116,12 @@ function Home() {
                         </div>
 
                         {/*  Card Favtools */}
-                        <div className="flex flex-wrap gap-4 justify-center xl:no-wrap xl:gap-10 xl:justify-evenly">
-                            <img src={FigmaIcon} alt="figma-icon" className="w-20 h-20 py-4 bg-base-100 rounded-xl shadow-lg  xl:w-52 xl:h-52 xl:py-10 xl:rounded-3xl" />
-                            <img src={GithubIcon} alt="github-icon" className="w-20 h-20 py-4 bg-base-100 rounded-xl shadow-lg  xl:w-52 xl:h-52 xl:py-10 xl:rounded-3xl" />
-                            <img src={TailwindIcon} alt="tailwind-icon" className="w-20 h-20 py-4 bg-base-100 rounded-xl shadow-lg  xl:w-52 xl:h-52 xl:py-10 xl:rounded-3xl" />
-                            <img src={ReactIcon} alt="react-icon" className="w-20 h-20 py-4 bg-base-100 rounded-xl shadow-lg  xl:w-52 xl:h-52 xl:py-10 xl:rounded-3xl" />
-                            <img src={VSIcon} alt="vs-icon" className="w-20 h-20 py-4 bg-base-100 rounded-xl shadow-lg  xl:w-52 xl:h-52 xl:py-10 xl:rounded-3xl" />
+                        <div className="flex flex-wrap gap-4 justify-between xl:no-wrap xl:gap-10 xl:justify-evenly">
+                            <img src={FigmaIcon} alt="figma-icon" className="w-24 h-24 py-4 bg-base-100 rounded-xl shadow-lg  xl:w-52 xl:h-52 xl:py-10 xl:rounded-3xl" />
+                            <img src={GithubIcon} alt="github-icon" className="w-24 h-24 py-4 bg-base-100 rounded-xl shadow-lg  xl:w-52 xl:h-52 xl:py-10 xl:rounded-3xl" />
+                            <img src={TailwindIcon} alt="tailwind-icon" className="w-24 h-24 py-4 bg-base-100 rounded-xl shadow-lg  xl:w-52 xl:h-52 xl:py-10 xl:rounded-3xl" />
+                            <img src={ReactIcon} alt="react-icon" className="w-24 h-24 py-4 bg-base-100 rounded-xl shadow-lg  xl:w-52 xl:h-52 xl:py-10 xl:rounded-3xl" />
+                            <img src={VSIcon} alt="vs-icon" className="w-24 h-24 py-4 bg-base-100 rounded-xl shadow-lg  xl:w-52 xl:h-52 xl:py-10 xl:rounded-3xl" />
                         </div>
 
                     </div>

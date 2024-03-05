@@ -71,18 +71,27 @@ export default function AuthProvider({ children }) {
     }
 
     const logout = () => {
-        setUser(null)
-        localStorage.removeItem('token')
         Swal.fire({
-            icon: 'success',
-            title: 'Logout Berhasil!',
-            text: 'Anda Berhasil Logout!',
-            showConfirmButton: true,
-            confirmButtonText: 'OK',
-            confirmButtonColor: '#17b472'
-
+            title: 'Apakah yakin ingin keluar?',
+            text: "Anda akan keluar dari halaman admin!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#17b472',
+            cancelButtonColor: '#f53e19',
+            confirmButtonText: 'Ya, Keluar!',
+            cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                setUser(null)
+                localStorage.removeItem('token')
+                navigate('/')
+                Swal.fire(
+                    'Berhasil!',
+                    'Anda telah keluar.',
+                    'success'
+                )
+            }
         })
-        navigate('/')
     }
 
     return (

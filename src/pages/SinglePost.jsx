@@ -188,7 +188,9 @@ function SinglePost() {
                     <section className="headers grid grid-cols-1 gap-16">
 
                         {/* thumbnail */}
-                        <img src={mediaItems?.guid?.rendered} alt={post.title?.rendered} className="w-full object-cover xl:rounded-[2rem] rounded-md" />
+                        <div className="bg-prim-jade-200 rounded-lg aspect-video overflow-hidden bg-[url('https://t3.ftcdn.net/jpg/02/77/30/98/360_F_277309825_h8RvZkoyBGPDocMtippdfe3497xTrOXO.jpg')]">
+                            <img src={mediaItems?.guid?.rendered} alt={post.title?.rendered} className="w-full h-full object-contain xl:rounded-[2rem] rounded-md" />
+                        </div>
 
                         {/* title */}
                         <div className="title flex flex-col">

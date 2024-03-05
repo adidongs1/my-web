@@ -89,7 +89,7 @@ export default function BlogProvider({ children }) {
                         showConfirmButton: true,
                         confirmButtonText: 'OK',
                         confirmButtonColor: '#17b472'
-                    }).then(() => navigate('/admin/dashboard'))
+                    }).then(() => navigate('/onepiece/dashboard'))
                 } else {
                     Swal.fire({
                         icon: 'error',
@@ -192,7 +192,7 @@ export default function BlogProvider({ children }) {
                         showConfirmButton: true,
                         confirmButtonText: 'OK',
                         confirmButtonColor: '#17b472'
-                    }).then(() => navigate('/admin/dashboard'))
+                    }).then(() => navigate('/onepiece/dashboard'))
                 } else {
                     Swal.fire({
                         icon: 'error',

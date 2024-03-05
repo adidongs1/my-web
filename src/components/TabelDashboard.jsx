@@ -176,9 +176,10 @@ function TabelDashboard() {
                                         <td>
                                             <div className="overflow-x-auto relative">
                                                 <div className='flex flex-col scroll-my-1 h-40'>
-                                                    <p>
-                                                        {post.content.rendered}
-                                                    </p>
+                                                    {/* <p>
+                                                        {post.excerpt.rendered}
+                                                    </p> */}
+                                                    <div dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }} />
                                                 </div>
                                             </div>
                                         </td>
