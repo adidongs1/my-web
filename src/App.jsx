@@ -39,7 +39,7 @@ function App() {
                   <Route path="/onepiece/media" element={<DashboardMedia />} />
                 </Route>
 
-
+                {/* client */}
                 <Route path="/" element={<Home />} />
                 <Route path="/about" element={<Maintenance />} />
                 <Route path="/portfolio" element={<Maintenance />} />
@@ -48,8 +48,6 @@ function App() {
                 {/* path blogging */}
                 <Route path="/blog" element={<Blog />} />
                 <Route path="/blog/single-post/:id" element={<SinglePost />} />
-
-                {/* <Route path="/test-feature" element={<TestFeature />} /> */}
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </MediaProvider>
