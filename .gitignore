@@ -24,4 +24,7 @@ dist-ssr
 *.sw?
 
 .env
+.pdf
 !CV_Adi.pdf
+
+/example
