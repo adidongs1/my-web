@@ -1,19 +1,17 @@
 import { useEffect, useContext } from 'react'
 import { NavLink } from 'react-router-dom'
-import { RotatingLines } from 'react-loader-spinner'
-
-import { BlogContext } from '../utils/BlogProvider'
+import DataFetch from '../utils/DataFetch'
 
 
-import LayoutMain from '../components/LayoutMain'
-import Paginations from '../components/Paginations'
-import FillButton from '../components/FillButton'
+import LayoutMain from '../layout/LayoutMain'
+import Paginations from '../components/basics/Paginations'
+import FillButton from '../components/basics/FillButton'
 
 import SearchIcon from '../assets/icons/search-icon.svg'
 import SadFace from '../assets/icons/sad-face.svg'
 
 function Blog() {
-    const { posts, loading, page, totalPages, keyword, query, setQuery, setPage, setKeyword, fetchPosts, images, fetchImages, sortOrder, setSortOrder, sortField, setSortField } = useContext(BlogContext)
+    const { posts, loading, page, totalPages, keyword, query, setQuery, setPage, setKeyword, fetchPosts, images, fetchImages } = DataFetch()
 
 
 
@@ -99,7 +97,7 @@ function Blog() {
                         ) : (  // cardblog 
                             posts.length > 0 ? (
                                 posts.map(post => (
-                                    <div key={post.id} className='flex flex-col xl:flex-row w-full xl:h-60 s shadow-lg gap-7 p-6 items-center rounded-xl'>
+                                    <div key={post.id} className='flex flex-col xl:flex-row w-full xl:h-60 shadow-lg gap-7 items-center rounded-xl'>
                                         <figure>
                                             {
                                                 images[post.id] ? (
@@ -116,31 +114,23 @@ function Blog() {
                                             }
                                         </figure>
 
-                                        <div className="content w-full">
+                                        <div className="content flex flex-col w-full h-full p-6 pl-0">
                                             <h2 className="card-title">
                                                 {post.title.rendered}
                                             </h2>
-                                            <div className='flex flex-col gap-9'>
-                                                <div className="w-full mb-auto">
-                                                    <section className='text-base'>
-                                                        <div dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }}
-                                                        />
-                                                    </section>
-                                                    <section className='flex gap-2'>
-                                                        {/* badge */}
-                                                    </section>
-                                                </div>
-                                                <NavLink to={"/blog/single-post/" + post.id}
-                                                    className="flex justify-end"
-                                                >
-                                                    <FillButton textBtn="Read More" />
-                                                </NavLink>
-
-                                            </div>
-
+                                            <div className='text-base' dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }}
+                                            />
+                                            <NavLink to={"/blog/single-post/" + post.id}
+                                                className="flex justify-end mt-auto w-full"
+                                            >
+                                                <FillButton textBtn="Read More" />
+                                            </NavLink>
 
                                         </div>
+
+
                                     </div>
+
                                 ))
                             ) : (
                                 <div className="flex flex-col xl:flex-row justify-center items-center opacity-25">

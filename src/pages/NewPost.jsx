@@ -1,4 +1,4 @@
-import NewPostFrom from "../components/NewPostForm"
+import NewPostFrom from "../components/blocks/NewPostForm"
 
 function NewPost() {
     return (

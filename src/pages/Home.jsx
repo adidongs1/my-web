@@ -1,13 +1,13 @@
 import React from 'react'
-import LayoutMain from '../components/LayoutMain'
+import LayoutMain from '../layout/LayoutMain'
 
 import ImgHero from '../assets/img/hero.png'
 import DownloadCv from '../assets/icons/cv_download.svg'
 import cv from '../assets/CV_Adi.pdf'
 
 
-import FillButton from '../components/FillButton'
-import OutlineButton from '../components/OutlineButton'
+import FillButton from '../components/basics/FillButton'
+import OutlineButton from '../components/basics/OutlineButton'
 
 import WebIcon from '../assets/icons/web-icon.svg'
 import GraphicIcon from '../assets/icons/graphic-icon.svg'
@@ -24,7 +24,7 @@ function Home() {
     return (
         <LayoutMain>
             <div className="container mx-auto xl:px-16 px-5 grid grid-cols-1 xl:gap-40 gap-20">
-                <section className='header flex flex-col-reverse md:flex-row items-center'>
+                <section className='header flex flex-col-reverse md:flex-row items-center gap-20'>
                     {/* content-left */}
                     <div className="content-left flex flex-col gap-6 w-full">
                         <div className='title'>
@@ -32,7 +32,7 @@ function Home() {
                             <h3 className='text-2xl font-bold text-prim-jade-500'>WEB DEVELOPER</h3>
                         </div>
                         <div className="profil-name">
-                            <h1 className='text-8xl font-extrabold'>ADI ARIFIN</h1>
+                            <h1 className='text-7xl lg:text-8xl font-extrabold mb-4'>ADI ARIFIN</h1>
                             <p>
                                 I am a person who is very enthusiastic about the web.
                                 I think presenting an attractive web design is a concern in developing branding for a product. To create a good website, I focus on responsive design, and clean code to make it more professional. For now, I am developing my skills to become a Full-stack Web developer.
@@ -49,7 +49,7 @@ function Home() {
 
                     {/* content-right */}
                     <div className="content-right w-full">
-                        <img src={ImgHero} alt="image" className=" object-contain" />
+                        <img src={ImgHero} alt="image" className=" object-contain w-full" />
                     </div>
 
                 </section>
@@ -64,7 +64,7 @@ function Home() {
                         </div>
 
                         {/* card skills */}
-                        <div className="cards w-full flex flex-col md:flex-row gap-20 justify-between">
+                        <div className="cards w-full flex flex-col md:flex-row xl:gap-20 gap-4 justify-between">
                             {/* web development */}
                             <div className="w-full p-4">
                                 <div className="flex flex-col">
@@ -116,12 +116,12 @@ function Home() {
                         </div>
 
                         {/*  Card Favtools */}
-                        <div className="flex flex-wrap gap-4 justify-between xl:no-wrap xl:gap-10 xl:justify-evenly">
-                            <img src={FigmaIcon} alt="figma-icon" className="w-24 h-24 py-4 bg-base-100 rounded-xl shadow-lg  xl:w-52 xl:h-52 xl:py-10 xl:rounded-3xl" />
-                            <img src={GithubIcon} alt="github-icon" className="w-24 h-24 py-4 bg-base-100 rounded-xl shadow-lg  xl:w-52 xl:h-52 xl:py-10 xl:rounded-3xl" />
-                            <img src={TailwindIcon} alt="tailwind-icon" className="w-24 h-24 py-4 bg-base-100 rounded-xl shadow-lg  xl:w-52 xl:h-52 xl:py-10 xl:rounded-3xl" />
-                            <img src={ReactIcon} alt="react-icon" className="w-24 h-24 py-4 bg-base-100 rounded-xl shadow-lg  xl:w-52 xl:h-52 xl:py-10 xl:rounded-3xl" />
-                            <img src={VSIcon} alt="vs-icon" className="w-24 h-24 py-4 bg-base-100 rounded-xl shadow-lg  xl:w-52 xl:h-52 xl:py-10 xl:rounded-3xl" />
+                        <div className="grid grid-cols-3 gap-8 md:grid-cols-5 md:gap-10 ">
+                            <img src={FigmaIcon} alt="figma-icon" className="w-full h-full aspect-square py-4 bg-base-100 rounded-xl shadow-lg xl:py-10 xl:rounded-3xl" />
+                            <img src={GithubIcon} alt="github-icon" className="w-full h-full aspect-square py-4 bg-base-100 rounded-xl shadow-lg xl:py-10 xl:rounded-3xl" />
+                            <img src={TailwindIcon} alt="tailwind-icon" className="w-full h-full aspect-square py-4 bg-base-100 rounded-xl shadow-lg xl:py-10 xl:rounded-3xl" />
+                            <img src={ReactIcon} alt="react-icon" className="w-full h-full aspect-square py-4 bg-base-100 rounded-xl shadow-lg xl:py-10 xl:rounded-3xl" />
+                            <img src={VSIcon} alt="vs-icon" className="w-full h-full aspect-square py-4 bg-base-100 rounded-xl shadow-lg xl:py-10 xl:rounded-3xl" />
                         </div>
 
                     </div>

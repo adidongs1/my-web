@@ -1,13 +1,14 @@
 import { useState } from "react";
-import useAuth from "../utils/UseAuth";
 import Swal from 'sweetalert2'
+
+import AuthProvider from "../utils/auth"
 
 
 import Logo from '../assets/img/just-logo.png'
 import decorRight from '../assets/img/decor-topRight.svg'
 import decorLeft from '../assets/img/decor-bottomLeft.svg'
 
-import FillButton from "../components/FillButton";
+import FillButton from "../components/basics/FillButton";
 
 function LoginAdmin() {
     const [input, setInput] = useState({
@@ -17,7 +18,7 @@ function LoginAdmin() {
 
     const [showPassword, setShowPassword] = useState(false)
 
-    const { login } = useAuth()
+    const { login } = AuthProvider()
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -26,9 +27,10 @@ function LoginAdmin() {
             return
 
         } else {
+            //jika pass dan usernam kosong
             Swal.fire({
                 icon: 'error',
-                title: 'Oops...',
+                title: 'Maaf!',
                 text: 'Silahkan isi username dan password!',
                 showConfirmButton: true,
                 confirmButtonText: 'OK',
@@ -69,9 +71,6 @@ function LoginAdmin() {
                                 onChange={handleInput}
                                 className='xl:min-h-12  rounded-lg px-4 py-2 w-full'
                             />
-                            <div id="user-username" className="sr-only">
-                                Please enter a valid username. It must contain at least 6 characters.
-                            </div>
                         </div>
                         <div className="form-control w-full">
                             <label htmlFor="password" className='xl:text-lg text-base font-bold text-start text-white line tracking-wider'>Password</label>
@@ -89,9 +88,7 @@ function LoginAdmin() {
                             <div className="flex justify-end">
                                 <button type="button" onClick={() => setShowPassword(!showPassword)} className="text-white text-sm font-semibold mt-2">Show Password</button>
                             </div>
-                            <div id="user-password" className="sr-only">
-                                your password should be more than 6 character
-                            </div>
+
                         </div>
 
 

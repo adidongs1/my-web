@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 
-import LayoutMain from '../components/LayoutMain'
+import LayoutMain from '../layout/LayoutMain'
 
 function SinglePost() {
 
