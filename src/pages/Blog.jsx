@@ -1,52 +1,37 @@
-import { useState, useEffect } from 'react'
+import { useEffect, useContext } from 'react'
 import { NavLink } from 'react-router-dom'
-import { RotatingLines } from 'react-loader-spinner'
+import DataFetch from '../utils/DataFetch'
 
 
-import LayoutMain from '../components/LayoutMain'
-import Paginations from '../components/Paginations'
-import FillButton from '../components/FillButton'
+import LayoutMain from '../layout/LayoutMain'
+import Paginations from '../components/basics/Paginations'
+import FillButton from '../components/basics/FillButton'
 
 import SearchIcon from '../assets/icons/search-icon.svg'
+import SadFace from '../assets/icons/sad-face.svg'
 
 function Blog() {
-    // Hook State
-    const [posts, setPosts] = useState([])
-    const [loading, setLoading] = useState(false)
-    const [page, setPage] = useState(1)
-    const [totalPages, setTotalPages] = useState(0)
-    const [keyword, setKeyword] = useState('')
-    const [query, setQuery] = useState('')
+    const { posts, loading, page, totalPages, keyword, query, setQuery, setPage, setKeyword, fetchPosts, images, fetchImages } = DataFetch()
 
-    //fetch data function
-    const fetchPosts = async () => {
-        try {
-            setLoading(true);
-            const res = await fetch(`https://eventespresso.com/wp-json/wp/v2/posts?_embed&page=${page}&search=${keyword}`);
-            let data = await res.json();
 
-            setPosts(data)
-            setLoading(false);
-            setTotalPages(parseInt(res.headers.get('X-WP-TotalPages')));
-        } catch (err) {
-            console.log(err);
-            setLoading(false);
-        }
-    };
 
-    // useEffect untuk memanggil fungsi fetchPosts() ketika page berubah
+
+    const handleSearchSubmit = (e) => {
+        e.preventDefault()
+        setKeyword(query)
+        setPage(1)
+        fetchPosts()
+    }
+
+    //useEffect untuk memanggil fungsi fetchPosts() dari BlogProvider
     useEffect(() => {
         fetchPosts();
-
     }, [page, keyword]);
 
-    const searchPost = (e) => {
-        e.preventDefault();
-        setPage(1);
-        setKeyword(query);
-
-        console.log('isQuery', query)
-    }
+    //useEffect untuk memanggil fungsi fetchImages() dari BlogProvider
+    useEffect(() => {
+        fetchImages();
+    }, [posts]);
 
 
     return (
@@ -54,23 +39,21 @@ function Blog() {
             <section className='blog container mx-auto px-5 mb-10'
             >
                 <div className="flex flex-col gap-16 w-full mt-40">
-                    <div className='lable-title'>
-                        <h3 className='text-base font-bold' >Blog</h3>
-                    </div>
-                    <div className="Title">
+                    <div className='title'>
+                        <h3 className='text-base font-bold mb-8' >Blog</h3>
                         <h1 className='text-5xl font-bold'>Share Knowledge,<br />
                             Gain Edge.</h1>
                     </div>
 
                     <div className="flex flex-row justify-end">
                         {/* search */}
-                        <form onSubmit={searchPost}>
+                        <form onSubmit={handleSearchSubmit}>
                             <div className="join">
                                 <input
                                     type="text"
                                     id='search'
                                     name='search'
-                                    className="input input-bordered join-item min-w-96"
+                                    className="input input-bordered join-item xl:min-w-96 min-w-80"
                                     placeholder="Search..."
                                     value={query}
                                     onChange={(e) => setQuery(e.target.value)}
@@ -85,45 +68,60 @@ function Blog() {
 
                     {/* render card blog  */}
                     <div className="wrapper-card flex flex-col gap-16">
-
                         {loading ? (
 
-                            <div className="flex justify-center items-center">
-                                <RotatingLines
-                                    visible={loading}
-                                    color="#000"
-                                    height={100}
-                                    width={100}
-                                    strokeWidth='6'
-                                    animationDuration={loading ? 1000 : 0}
-                                    ariaLabel='rotating-lines-loading'
-                                />
+                            <div className='flex justify-center items-center min-h-svh'>
+                                <svg
+                                    className='animate-spin h-64 w-64 mx-auto text-prim-jade-500 '
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <circle
+                                        className="opacity-25"
+                                        cx={12}
+                                        cy={12}
+                                        r={10}
+                                        stroke="currentColor"
+                                        strokeWidth={4}
+                                    />
+                                    <path
+                                        className="opacity-75"
+                                        fill="currentColor"
+                                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                                    />
+                                </svg>
                             </div>
+
+
                         ) : (  // cardblog 
-
-
-                            posts.map(post => (
-                                <div key={post.id} className='flex flex-col xl:flex-row w-full xl:h-60 s shadow-lg gap-7 p-6 items-center rounded-xl'>
-                                    <figure>
-                                        {/* image */}
-                                    </figure>
-
-                                    <div className="content w-full">
-                                        <h2 className="card-title">
-                                            {post.title.rendered}
-                                        </h2>
-                                        <div className='flex flex-col gap-9'>
-                                            <div className="w-full mb-auto">
-                                                <section className='text-base'>
-                                                    <div dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }}
+                            posts.length > 0 ? (
+                                posts.map(post => (
+                                    <div key={post.id} className='flex flex-col xl:flex-row w-full xl:h-60 shadow-lg gap-7 items-center rounded-xl'>
+                                        <figure>
+                                            {
+                                                images[post.id] ? (
+                                                    <img
+                                                        src={images[post.id]}
+                                                        alt={post.title.rendered}
+                                                        className="xl:min-w-96 h-60 object-cover rounded-xl"
                                                     />
-                                                </section>
-                                                <section className='flex gap-2'>
-                                                    {/* badge */}
-                                                </section>
-                                            </div>
-                                            <NavLink to={"/single-post/ " + post.id}
-                                                className="flex justify-end"
+                                                ) : (
+                                                    <div
+                                                        className="skeleton xl:min-w-96 h-60 object-cover rounded-xl"
+                                                    />
+                                                )
+                                            }
+                                        </figure>
+
+                                        <div className="content flex flex-col w-full h-full p-6 pl-0">
+                                            <h2 className="card-title">
+                                                {post.title.rendered}
+                                            </h2>
+                                            <div className='text-base' dangerouslySetInnerHTML={{ __html: post.excerpt.rendered }}
+                                            />
+                                            <NavLink to={"/blog/single-post/" + post.id}
+                                                className="flex justify-end mt-auto w-full"
                                             >
                                                 <FillButton textBtn="Read More" />
                                             </NavLink>
@@ -132,14 +130,25 @@ function Blog() {
 
 
                                     </div>
+
+                                ))
+                            ) : (
+                                <div className="flex flex-col xl:flex-row justify-center items-center opacity-25">
+                                    <img src={SadFace} alt="sad-face" className='w-60' />
+                                    <div className="flex flex-col">
+                                        <h3 className='text-7xl font-bold'>No</h3>
+                                        <h3 className='text-7xl font-bold'>Post</h3>
+                                        <h3 className='text-7xl font-bold'>Found!</h3>
+
+                                    </div>
                                 </div>
-                            ))
+                            )
 
                         )
                         }
                     </div>
 
-                    <div className=" pagination flex justify-center items-center">
+                    <div className={`pagination flex justify-center items-center ${loading ? 'hidden' : ''}`}>
                         <Paginations
                             page={page}
                             totalPages={totalPages}
@@ -149,7 +158,7 @@ function Blog() {
 
                 </div>
 
-            </section>
+            </section >
         </LayoutMain >
     )
 }

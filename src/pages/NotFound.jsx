@@ -2,7 +2,7 @@
 import { NavLink } from 'react-router-dom'
 
 import ImgHero from '../assets/img/illustrasi.jpg'
-import FillButton from '../components/FillButton'
+import FillButton from '../components/basics/FillButton'
 
 function Maintenance() {
     return (
