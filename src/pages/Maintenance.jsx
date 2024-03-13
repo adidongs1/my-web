@@ -2,7 +2,7 @@
 import { NavLink } from 'react-router-dom'
 
 import ImgHero from '../assets/img/illustrasi.jpg'
-import FillButton from '../components/FillButton'
+import FillButton from '../components/basics/FillButton'
 
 function Maintenance() {
     return (
@@ -15,7 +15,7 @@ function Maintenance() {
                             <h3 className='text-2xl font-bold text-gray-400'>Mohon Maaf 🙏🏽</h3>
                         </div>
                         <div className="subtitle">
-                            <h1 className='text-8xl font-bold'>Halaman ini belum Tersedia</h1>
+                            <h1 className='text-8xl font-bold'>Halaman ini belum Tersedia (Maintenance)</h1>
                             <p>
                                 Website sedang dalam proses pengembangan, mohon maaf atas ketidaknyamanannya. Terima kasih.
                             </p>
